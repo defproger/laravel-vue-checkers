@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::post('/turn', function (\Illuminate\Http\Request $request) {
-    \App\Events\Turn::dispatch($request->input('turn'));
+    \App\Events\Turn::dispatch($request->all());
 });
 
 

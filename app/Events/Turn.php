@@ -15,6 +15,7 @@ class Turn implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $turn;
+    public $id;
     /**
      * Create a new event instance.
      *
@@ -33,6 +34,6 @@ class Turn implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('game');
+        return new PrivateChannel('game'.$this->socket);
     }
 }

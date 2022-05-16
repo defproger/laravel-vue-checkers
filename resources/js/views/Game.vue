@@ -41,14 +41,11 @@ export default {
 
         }
     },
-    created() {
+    mounted() {
         this.startPositions();
-        // this.$echo.channel('game')
-        //     .listen('Turn', ({turn}) => {
-        //         console.log(turn)
-        //         console.log(1)
-        //         this.refresh(turn.from, turn.to)
-        //     })
+        this.$echo.private('game.1').listen('Turn', (res) => {
+            console.log(res);
+        });
     },
     computed: {
         turn() {
@@ -63,7 +60,7 @@ export default {
             let posName = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
             let checkBlack = true;
             let position = '';
-            let color = 'white';
+            let color = '';
 
             for (let i = 1; i <= this.boardSize; i++) {
                 checkBlack = (i % 2) !== 0;
@@ -94,7 +91,8 @@ export default {
                 turn: {
                     from: from,
                     to: to,
-                }
+                },
+                id: 1
             })
         },
         kill(die) {

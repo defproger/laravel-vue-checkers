@@ -1,4 +1,3 @@
-
 require('./bootstrap');
 
 window.Vue = require('vue').default;
@@ -11,19 +10,22 @@ import store from "./store";
 import VueEcho from 'vue-echo-laravel';
 import VueSocketIO from 'vue-socket.io'
 
+let host = window.location.hostname + ':6001';
+
 Vue.use(new VueSocketIO({
     debug: true,
-    connection: 'http://localhost:8000',
+    connection: host,
     vuex: {
         store,
         actionPrefix: 'SOCKET_',
         mutationPrefix: 'SOCKET_'
     },
     // options: { path: "/my-app/" }
-}))
+}));
+
 Vue.use(VueEcho, {
     broadcaster: 'vue-socket.io',
-    host: window.location.hostname + ':6001',
+    host,
 });
 
 Vue.use(Vuex)

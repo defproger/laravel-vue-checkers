@@ -17,10 +17,9 @@ use Illuminate\Support\Facades\Broadcast;
 //    return (int) $user->id === (int) $id;
 //});
 
-Broadcast::channel('game', function ($turn) {
-    return $turn;
-//    return [
-//        'from' => $turn->from,
-//        'to' => $turn->to,
-//    ];
+Broadcast::channel('App.Events.Turn.{id}', function ($turn,$id) {
+    return [
+        'from' => $turn->from,
+        'to' => $turn->to,
+    ];
 });
